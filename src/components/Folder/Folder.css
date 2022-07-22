@@ -1,0 +1,30 @@
+.folder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  width: 223px;
+  background-color: #bebebe;
+  margin: 7px;
+  border-radius: 10px;
+  border-style: groove;
+  cursor: pointer;
+}
+.detailsFolder {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folderFlex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.renameFolderInput {
+  width: 82%;
+  border: none;
+  border-bottom: 3px solid black;
+  background-color: rgb(190, 190, 190);
+}

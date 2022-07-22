@@ -1,0 +1,43 @@
+.file {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  height: 150px;
+  background-color: rgb(234, 234, 225);
+  margin: 7px;
+  border-radius: 10px;
+  border-style: groove;
+  cursor: pointer;
+}
+.fileName {
+  font-size: 16px;
+}
+.options {
+  display: flex;
+  justify-content: space-evenly;
+}
+.imageType {
+  height: 150px;
+  background-position: center;
+  background-size: contain;
+  background-repeat-x: no-repeat;
+}
+.renameFileInput {
+  width: 100px;
+}
+.js {
+  background-image: url("../../images/fileTypes/js.png");
+}
+.json {
+  background-image: url("../../images/fileTypes/json.png");
+}
+.html {
+  background-image: url("../../images/fileTypes/html.png");
+}
+.svg {
+  background-image: url("../../images/fileTypes/svg.png");
+}
+.css {
+  background-image: url("../../images/fileTypes/css.png");
+}

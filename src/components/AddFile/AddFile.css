@@ -1,0 +1,27 @@
+.addFile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputAddFile {
+  display: none;
+}
+.inputAddFile {
+  cursor: pointer;
+}
+
+.inputAddFile {
+  display: none;
+}
+.labelAddFile {
+  cursor: pointer;
+}
+.addFile_fileName {
+  color: green;
+}
+.formAddFile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

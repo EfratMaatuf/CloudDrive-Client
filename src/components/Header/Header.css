@@ -1,0 +1,31 @@
+.headerContainer {
+    display: flex;
+    justify-content: center;
+    height: 90px;
+    background-color: white;
+    box-shadow: 1px -2px 14px 0px black;
+  }
+  .headerInnerWidth {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .workshopHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .headerLogo {
+    height: 53px;
+  }
+  .threeLines {
+    height: 33px;
+    /* object-fit: contain; */
+  }
+  .bookify {
+    font-weight: bold;
+    font-size: 25px;
+    width: 180px;
+  }
+  
