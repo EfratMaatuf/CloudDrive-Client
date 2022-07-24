@@ -35,9 +35,22 @@
 .html {
   background-image: url("../../images/fileTypes/html.png");
 }
+.css {
+  background-image: url("../../images/fileTypes/css.png");
+}
 .svg {
   background-image: url("../../images/fileTypes/svg.png");
 }
-.css {
-  background-image: url("../../images/fileTypes/css.png");
+.pdf {
+  background-image: url("../../images/fileTypes/pdf.png");
+}
+.png {
+  background-image: url("../../images/fileTypes/png.png");
+}
+.jpg {
+  background-image: url("../../images/fileTypes/jpg.png");
+}
+.fileDetails {
+  text-align: left;
+  font-weight: bold;
 }

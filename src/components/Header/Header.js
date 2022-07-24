@@ -1,6 +1,6 @@
 import React from "react";
 // import { useNavigate } from "react-router-dom";
-import logo from "../../images/bookLogo.png";
+import foldersImg from "../../images/folders.png";
 import threeLines from "../../images/threeLines.png";
 import "./Header.css";
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
         <div className="workshopHeader">
           <img
             onClick={navLogin}
-            src={logo}
+            src={foldersImg}
             alt="logo"
             className="headerLogo"
           />

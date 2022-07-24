@@ -7,25 +7,30 @@ const AddFile = () => {
   const form = useRef(null);
   const { path, setPath } = useContext(PathContext);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    console.log("submit");
-    console.log(e.target[0].form[0].files[0]);
     const strPath = path.reduce((str, file) => `${str}/${file}`);
     console.log("🚀 ~ file: AddFile.js ~ line 15 ~ submit ~ strPath", strPath);
-    const data = new FormData(form.current);
-    console.log(data);
+    const form = new FormData();
+    form.append("file", file);
+    console.log(form);
     const requestOption = {
       method: "POST",
       headers: {
-        // "Content-Type": "multipart/form-data"
-        "Content-Type": "application/x-www-form-urlencoded",
+        // "Content-Type": "multipart/form-data",
+        // "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: data,
+      body: form,
     };
-    fetch(`http://localhost:3600/files/addFile?path=${strPath}`, requestOption)
-      .then((res) => res.json())
-      .then((json) => console.log(json));
+    const response = await fetch(
+      `http://localhost:3600/files/addFile?path=${strPath}`,
+      requestOption
+    );
+    const data = await response.json();
+    console.log(data);
+    if (data.message === "success") {
+      setPath([...path]);
+    }
   };
   return (
     <div className="file addFile">
@@ -46,7 +51,7 @@ const AddFile = () => {
             className="inputAddFile"
             id="inputTag"
             type="file"
-            accept=" .js, .json , .html, .css " //, .jpg , .png , .ts , .doc , audio/* , video/* , image/* "
+            accept=" .js, .json , .html, .css ,.svg,.pdf,.png,.jpg" //  .ts , .doc , audio/* , video/* , image/* "
             onChange={(e) => setFile(e.target.files[0])}
           />
           <br />

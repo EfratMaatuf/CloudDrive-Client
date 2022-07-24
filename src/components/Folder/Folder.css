@@ -28,3 +28,6 @@
   border-bottom: 3px solid black;
   background-color: rgb(190, 190, 190);
 }
+.formRenameFolder {
+  display: flex;
+}

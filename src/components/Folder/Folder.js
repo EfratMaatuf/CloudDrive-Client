@@ -18,7 +18,6 @@ const Folder = ({ folderName }) => {
   const deleteFolder = async () => {
     const requestOption = {
       method: "DELETE",
-      // headers: { "Content-Type": "application/json" },
     };
     const response = await fetch(
       `http://localhost:3600/folders/delete?folderPath=${strPath}/${folderName}`,
@@ -31,7 +30,8 @@ const Folder = ({ folderName }) => {
     }
   };
 
-  const rename = async () => {
+  const rename = async (e) => {
+    e.preventDefault();
     const oldStrPath = strPath.concat(`/${folderName}`);
     const newStrPath = strPath.concat(`/${newFolderName}`);
     if (!newFolderName) {
@@ -42,8 +42,8 @@ const Folder = ({ folderName }) => {
       method: "PUT",
       headers: { "Content-type": "application/json" },
       data: JSON.stringify({
-        oldPath: { oldStrPath },
-        newPath: { newStrPath },
+        oldPath: oldStrPath,
+        newPath: newStrPath,
       }),
     };
     const response = await fetch(
@@ -71,18 +71,21 @@ const Folder = ({ folderName }) => {
           </div>
           <div className="folderName">
             {renameFolder ? (
-              <input
-                className="renameFolderInput"
-                onInput={(e) => setNewFolderName(e.target.value)}
-                type="text"
-              />
+              <form onSubmit={rename} className="formRenameFolder">
+                <input
+                  className="renameFolderInput"
+                  onInput={(e) => setNewFolderName(e.target.value)}
+                  type="text"
+                />
+                <button type="submit">Rename</button>
+              </form>
             ) : (
               folderName
             )}
           </div>
         </div>
         {renameFolder ? (
-          <button onClick={rename}>Rename</button>
+          <></>
         ) : (
           <div className="folderFlex">
             <div onClick={() => setRenameFolder(true)}>

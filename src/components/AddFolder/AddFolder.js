@@ -7,7 +7,8 @@ const AddFolder = () => {
   const [newFolderName, setNewFolderName] = useState();
   const [input, setInput] = useState(false);
 
-  const addFolder = async () => {
+  const addFolder = async (e) => {
+    e.preventDefault();
     const strPath = path.reduce((str, file) => `${str}/${file}`);
     if (!newFolderName) {
       console.log("empty folder name");
@@ -35,15 +36,15 @@ const AddFolder = () => {
         <AiFillFolderAdd />
       </div>
       {input ? (
-        <>
+        <form onSubmit={addFolder} className="formAddFolder">
           <input
             className="addFolderInput"
             type="text"
             placeholder="new folder"
             onInput={(e) => setNewFolderName(e.target.value)}
           />
-          <div onClick={addFolder}>change</div>
-        </>
+          <div type="submit">change</div>
+        </form>
       ) : (
         <>
           <div>Add folder </div>

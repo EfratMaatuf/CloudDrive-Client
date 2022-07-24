@@ -10,11 +10,28 @@ const File = ({ fileName }) => {
   const { path, setPath } = useContext(PathContext);
   const [renameFile, setRenameFile] = useState(false);
   const [newFileName, setNewFileName] = useState();
+  const [fileDetailsDiv, setFileDetailsDiv] = useState(false);
+  const [fileDetails, setFileDetails] = useState();
+
   const type = fileName.slice(fileName.indexOf(".") + 1, fileName.length);
 
   useEffect(() => {
     setRenameFile(false);
   }, [path]);
+
+  const download = async () => {
+    const strPath = path.reduce((str, file) => `${str}/${file}`);
+    const requestOption = {
+      method: "GET",
+      // headers: { "Content-Type": "application/json" },
+    };
+    const response = await fetch(
+      `http://localhost:3600/files/download?filePath=root/FullStack/App.css`,
+      requestOption
+    );
+    const data = await response.json();
+    console.log(data);
+  };
 
   const deleteFile = async () => {
     const strPath = path.reduce((str, file) => `${str}/${file}`);
@@ -33,23 +50,22 @@ const File = ({ fileName }) => {
     }
   };
   const renameFileFetch = async (e) => {
-    const strPath = path.reduce((str, file) => `${str}/${file}`);
-
     e.preventDefault();
-    console.log(newFileName);
-
-    const oldStrPath = strPath.concat(`/${fileName}`);
-    const newStrPath = strPath.concat(`/${newFileName}`);
     if (!newFileName) {
       console.log("empty file name");
       return; /** */
     }
+
+    const strPath = path.reduce((str, file) => `${str}/${file}`);
+    const oldStrPath = strPath.concat(`/${fileName}`);
+    const newStrPath = strPath.concat(`/${newFileName}.${type}`);
+
     const requestOption = {
       method: "PUT",
-      headers: { "Content-type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       data: JSON.stringify({
-        oldPath: { oldStrPath },
-        newPath: { newStrPath },
+        oldPath: oldStrPath,
+        newPath: newStrPath,
       }),
     };
     const response = await fetch(
@@ -62,6 +78,24 @@ const File = ({ fileName }) => {
       setRenameFile(false);
       setPath([...path]);
     }
+  };
+  const fileDetailsFetch = async () => {
+    if (fileDetailsDiv) {
+      setFileDetailsDiv(false);
+      return;
+    }
+    const strPath = path.reduce((str, file) => `${str}/${file}`);
+    setFileDetailsDiv(true);
+    const requestOption = {
+      method: "GET",
+    };
+    const response = await fetch(
+      `http://localhost:3600/files/fileDetails?filePath=${strPath}/${fileName}`,
+      requestOption
+    );
+    const data = await response.json();
+    console.log(data);
+    setFileDetails(data);
   };
   return (
     <div className="file">
@@ -81,18 +115,21 @@ const File = ({ fileName }) => {
             fileName
           )}
         </div>
+        {fileDetailsDiv && (
+          <div className="fileDetails">size: {fileDetails?.size} bytes</div>
+        )}
       </div>
       <div className="options">
         <div onClick={deleteFile}>
           <AiTwotoneDelete />
         </div>
-        <div onClick={() => setRenameFile(true)}>
+        <div onClick={() => setRenameFile(!renameFile)}>
           <MdOutlineDriveFileRenameOutline />
         </div>
-        <div onClick={togglePopup}>
+        <div onClick={download}>
           <AiOutlineDownload />
         </div>
-        <div onClick={togglePopup}>
+        <div onClick={fileDetailsFetch}>
           <CgDetailsMore />
         </div>
       </div>
